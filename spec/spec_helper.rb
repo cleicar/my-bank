@@ -1,5 +1,18 @@
 require 'database_cleaner'
 require 'factory_girl_rails'
+require 'simplecov'
+
+SimpleCov.start 'rails' do
+  add_filter '/config/'
+  add_filter '/spec/'
+  add_filter '/vendor/'
+  
+  add_group 'Controllers',  'app/controllers'
+  add_group 'Models',       'app/models'
+  add_group 'Helpers',      'app/helpers'
+  add_group 'Mailers',      'app/mailers'
+  add_group 'Libraries',    'lib'
+end
 
 ENV["RAILS_ENV"] ||= 'test'
 
