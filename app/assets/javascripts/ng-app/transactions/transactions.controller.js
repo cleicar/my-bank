@@ -1,34 +1,47 @@
 (function() {
   'use strict';
 
-  angular.module('MyBank').controller('TransactionsCtrl', TransactionsCtrl);
+  angular
+    .module('MyBank')
+    .controller('TransactionsCtrl', TransactionsCtrl);
 
-  TransactionsCtrl.$inject = ['$scope', '$timeout', '$state', 'transactionsService'];
+  TransactionsCtrl.$inject = ['$timeout', '$state', 'transactionsService'];
 
-  function TransactionsCtrl($scope, $timeout, $state, transactionsService) {
-    var vm = this;
+  function TransactionsCtrl($timeout, $state, transactionsService) {
+    var vm = this;   
 
-    $scope.saveTransaction  = saveTransaction;
+    vm.saveTransaction    = saveTransaction;
+    vm.getAccountUsername = getAccountUsername;
+
+    vm.$onInit = initialize;
 
     function saveTransaction() {
-      transactionsService.add($scope.ts)
+      transactionsService.transferMoney(vm.ts)
       .then(function(response) {
+        if(response.success)
+          $state.go('portal.home');
+        else
+          vm.message = response.message;
+      })
+      .catch(error);
+    }
+
+    function getAccountUsername() {
+      transactionsService.getUsername(vm.ts.source_account)
+      .then(function(response) {
+        vm.ts.source_name = response.user_name;
       })
       .catch(error);
     }
 
     function error(response) {
-      $scope.message = "Houve um erro inesperado ao carregar os dados.";
+      vm.message = "Houve um erro inesperado ao carregar os dados.";
     }
 
     function initialize() {
-      $scope.secondPanel = false;
-
-      $scope.ts = {
-        date: moment().locale("pt-br").format("L")
+      vm.ts = {
+        date: new Date(Date.now()).toLocaleString()
       }
     }
-
-    initialize();
   }
 })();

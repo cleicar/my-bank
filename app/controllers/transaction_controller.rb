@@ -1,24 +1,32 @@
 class TransactionController < ApplicationController
+  include TransactionHelper
+
   respond_to :json
 
-  def new
+  def index
   end
 
   def create
-    debugger
+    response = Hash.new
+    response[:success] = false
 
-    return_message = "Transferência realizada com sucesso!"
+    destination_account = get_account_by_code(params[:destination_account])
 
-    source_account      = Account.where(account_id: params[:source_account]).first
-    destination_account = Account.where(account_id: params[:destination_account]).first
+    if destination_account.present?
+      source_account = get_account_by_code(params[:source_account])
 
-    if source_account.present?
-
+      if source_account.balance < params[:amount].to_f
+        response[:message] = "Saldo insuficiente."  
+      else
+        response = transfer_money(source_account, destination_account, params[:amount])
+        response[:success] = true
+        response[:message] = "Transferência realizada com sucesso!"
+      end
     else
-      return_message = "Conta destino não existe."
+      response[:message] = "Conta destino não existe."
     end
 
-    render status: 404, json: { message: "Usuário não encontrado." }
+    render status: 200, json: response
   end
 
 end

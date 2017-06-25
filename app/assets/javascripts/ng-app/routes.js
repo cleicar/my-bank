@@ -21,12 +21,14 @@
       })
       .state('portal.home', {
         url: '/home',
+        controllerAs: 'vm',
         controller: 'BalanceCtrl',
         templateUrl: '/assets/ng-app/balance/balance.html'
       })
       .state('portal.transactions', {
         url: '/transactions',
         controller: 'TransactionsCtrl',
+        controllerAs: 'vm',
         templateUrl: '/assets/ng-app/transactions/transactions.html'
       });
     }])

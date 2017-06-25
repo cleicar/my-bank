@@ -12,24 +12,49 @@ RSpec.describe TransactionController, type: :controller do
 		end
   end
 
-  context "Testing adding new transaction" do 
+	  context "Testing adding new transaction" do 
+
+		let(:source_client){
+      FactoryGirl.create(:user)
+    }
+
+		let(:destination_client){
+      FactoryGirl.create(:user_b)
+    }
+
   	before do
 			@params = {
-				source_branch: '3998',
 				source_account: '0100427',
-				destination_branch: '3998',
-				destination_account: '24876009',
-				date: '24/06/2017',
+				destination_account: '89218921',
+				date: Time.now.to_formatted_s(:db),
 				amount: 100.00
 			}
+
+			account_a = FactoryGirl.create(:account_a)
+			account_b = FactoryGirl.create(:account_b)
+
+			source_client.update_attributes(account: account_a)
+			destination_client.update_attributes(account: account_b)
+
+			post :create, @params
 		end
 
-  	it 'should save the new transaction' do 
-  		post :create, @params
-
+  	it 'should save the new transaction' do
 			response_body = JSON.parse response.body
-			expect(response_body["message"]).to eq 'Empresa adicionada com sucesso!'
+			expect(response_body["message"]).to eq 'Transferência realizada com sucesso!'
   	end
+
+  	it 'destination account should have more balance' do
+      destination_client.reload
+
+      expect(destination_client.account.balance).to eq 1018.17
+    end
+
+    it 'source account should have less balance' do 
+    	source_client.reload
+
+      expect(source_client.account.balance).to eq 1231.29
+    end
 
   end
 

@@ -5,12 +5,12 @@ RSpec.describe Account, type: :model do
   describe "Creating new account" do
 
   	let(:account){
-    	FactoryGirl.create(:account)
+    	FactoryGirl.create(:account_a)
   	}
 
   	let(:attributes){
-    	{"account_code"=>"99999999", 
-			"balance"=>1300.00}
+    	{"account_code"=>"0100427", 
+			"balance"=>1331.29}
   	}
 
 		it "should have all account fields" do
