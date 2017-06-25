@@ -8,7 +8,6 @@
 
       $urlRouterProvider.otherwise('portal/home');
 
-      // # no hashURl anymore
       $locationProvider.html5Mode({
         enabled: true,
         requireBase: false
@@ -24,6 +23,11 @@
         url: '/home',
         controller: 'BalanceCtrl',
         templateUrl: '/assets/ng-app/balance/balance.html'
+      })
+      .state('portal.transactions', {
+        url: '/transactions',
+        controller: 'TransactionsCtrl',
+        templateUrl: '/assets/ng-app/transactions/transactions.html'
       });
     }])
 })();
