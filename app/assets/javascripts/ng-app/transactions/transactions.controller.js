@@ -12,10 +12,13 @@
 
     vm.saveTransaction    = saveTransaction;
     vm.getAccountUsername = getAccountUsername;
+    vm.cancelTransaction  = cancelTransaction;
 
     vm.$onInit = initialize;
 
     function saveTransaction() {
+      vm.message = null;
+      
       transactionsService.transferMoney(vm.ts)
       .then(function(response) {
         if(response.success)
@@ -27,18 +30,32 @@
     }
 
     function getAccountUsername() {
+      vm.message = null;
+
       transactionsService.getUsername(vm.ts.source_account)
       .then(function(response) {
-        vm.ts.source_name = response.user_name;
+        if(response.user_name){
+          vm.ts.source_name = response.user_name;
+          vm.blockFields = false;
+        }else{
+          vm.message = 'Conta não encontrada.'
+        }
       })
       .catch(error);
     }
+
+    function cancelTransaction() {
+      $state.go('portal.home');
+    }    
 
     function error(response) {
       vm.message = "Houve um erro inesperado ao carregar os dados.";
     }
 
     function initialize() {
+      vm.message     = null;
+      vm.blockFields = true;
+
       vm.ts = {
         date: new Date(Date.now()).toLocaleString()
       }

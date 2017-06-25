@@ -4,6 +4,10 @@
   </div>  
 </div>
 
+<div ng-if="vm.message" class="alert alert-warning text-center">
+  {{ vm.message }}
+</div>
+
 <div class="row">
   <form class="form-group form-inline col-lg-12" role="form" ng-submit="vm.saveTransaction()">
     <div class="col-lg-6"> <!-- source account !-->
@@ -42,17 +46,17 @@
             <div class="col-lg-12">
               <div class="form-group col-md-12">
                 <label class="control-label">Account</label>
-                <input type="text" id="disabledInput" required class="form-control col-md-12" ng-model="vm.ts.destination_account">
+                <input type="text" ng-disabled="vm.blockFields" required class="form-control col-md-12" ng-model="vm.ts.destination_account">
               </div>
 
               <div class="form-group col-md-12">
                 <label class="control-label">Amount</label>
-                <input type="text" id="disabledInput" class="form-control col-md-12" ng-model="vm.ts.amount">
+                <input type="text" ng-disabled="vm.blockFields" class="form-control col-md-12" ng-model="vm.ts.amount">
               </div>
 
               <div class="form-group col-md-12">
-                <button type="submit" class="form-control btn btn-default pull-left">Enviar</button>
-                <button type="reset"  class="form-control btn btn-default pull-left" ng-click="$state.go('portal.home');">Cancelar</button>
+                <button type="submit" ng-disabled="vm.blockFields" class="form-control btn btn-default pull-left">Enviar</button>
+                <button type="reset"  class="form-control btn btn-default pull-left" ng-click="vm.cancelTransaction()">Cancelar</button>
               </div>
             </div>
           </div>

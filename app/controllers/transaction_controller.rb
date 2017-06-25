@@ -16,7 +16,7 @@ class TransactionController < ApplicationController
       source_account = get_account_by_code(params[:source_account])
 
       if source_account.balance < params[:amount].to_f
-        response[:message] = "Saldo insuficiente."  
+        response[:message] = "Saldo insuficiente."
       else
         response = transfer_money(source_account, destination_account, params[:amount])
         response[:success] = true

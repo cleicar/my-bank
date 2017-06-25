@@ -5,35 +5,37 @@
     .module('MyBank')
     .controller('BalanceCtrl', BalanceCtrl);
 
-  BalanceCtrl.$inject = ['$scope', '$timeout', '$state', 'transactionsService'];
+  BalanceCtrl.$inject = ['$timeout', '$state', 'transactionsService'];
 
-  function BalanceCtrl($scope, $timeout, $state, transactionsService) {
-    $scope.getBalance  = getBalance;
+  function BalanceCtrl($timeout, $state, transactionsService) {
+    var vm = this;
+
+    vm.getBalance  = getBalance;
+
+    vm.$onInit = initialize;
 
     function getBalance() {
-      transactionsService.getBalance($scope.account)
+      transactionsService.getBalance(vm.account)
       .then(function(response) {
-        $scope.showBalance = true;
+        vm.showBalance = true;
 
         if(response.account){
-          $scope.message = undefined;
-          $scope.account = response.account;
-          $scope.account.clientName = response.client_name;
+          vm.message = undefined;
+          vm.account.balance = response.account.balance;
+          vm.account.clientName = response.client_name;
         }else{  
-          $scope.message = "Conta não encontrada";
+          vm.message = "Conta não encontrada";
         }
       })
       .catch(error);
     }
 
     function error(response) {
-      $scope.message = "Houve um erro inesperado ao carregar os dados.";
+      vm.message = "Houve um erro inesperado ao carregar os dados.";
     }
 
     function initialize() {
-      $scope.account = {}
+      vm.account = {}
     }
-
-    initialize();
   }
 })();

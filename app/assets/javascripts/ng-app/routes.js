@@ -16,6 +16,7 @@
       $stateProvider
       .state('portal', {
         url: '/portal',
+        controllerAs: 'vm',
         controller: 'BalanceCtrl',
         templateUrl: '/assets/ng-app/core/main.html'
       })

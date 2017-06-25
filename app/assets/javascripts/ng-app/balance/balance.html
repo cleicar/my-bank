@@ -13,10 +13,10 @@
             <div class="col-lg-12">
               <div class="form-group col-md-12">
                 <label class="control-label">Your Account Code</label>
-                <input type="text" id="disabledInput" ng-required="required" class="form-control col-md-12" ng-model="account.account_code">
+                <input type="text" id="disabledInput" ng-required="required" class="form-control col-md-12" ng-model="vm.account.account_code">
               </div>
               <div class="form-group col-md-12">
-                <button type="submit" class="form-control btn btn-default pull-left" ng-click="getBalance()">Get balance</button>
+                <button type="submit" class="form-control btn btn-default pull-left" ng-click="vm.getBalance()">Get balance</button>
               </div>
             </div>
           </div>
@@ -24,18 +24,18 @@
       </div>
     </div>
 
-    <div class="col-lg-6" ng-show="showBalance != undefined">
+    <div class="col-lg-6" ng-show="vm.showBalance != undefined">
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="row">
             <div class="col-lg-12">
               <div class="form-group col-md-12">
-                <div ng-if="account.balance">
-                  <p class="control-label">Hello, {{ account.clientName }} </p>
-                  <p class="control-label">Your account balance is: {{ account.balance | currency: 'R$'}} </p>
+                <div ng-if="vm.account.balance">
+                  <p class="control-label">Hello, {{ vm.account.clientName }} </p>
+                  <p class="control-label">Your account balance is: {{ vm.account.balance | currency: 'R$'}} </p>
                 </div>
-                <div ng-if="message" class="alert alert-warning text-center">
-                  {{ message }}
+                <div ng-if="vm.message" class="alert alert-warning text-center">
+                  {{ vm.message }}
                 </div>
               </div>
             </div>

@@ -12,7 +12,7 @@ RSpec.describe TransactionController, type: :controller do
 		end
   end
 
-	  context "Testing adding new transaction" do 
+	context "Testing adding new transaction" do 
 
 		let(:source_client){
       FactoryGirl.create(:user)
@@ -39,6 +39,24 @@ RSpec.describe TransactionController, type: :controller do
 			post :create, @params
 		end
 
+		it 'should cancel transaction if destination account does not exists' do 
+			@params[:destination_account] = '9999999'
+			
+			post :create, @params
+
+			response_body = JSON.parse response.body
+			expect(response_body["message"]).to eq 'Conta destino não existe.'
+		end
+
+		it 'should cancel transaction if required amount is more than source balance' do
+			@params[:amount] = 2000.00
+			
+			post :create, @params
+
+			response_body = JSON.parse response.body
+			expect(response_body["message"]).to eq 'Saldo insuficiente.'
+		end
+
   	it 'should save the new transaction' do
 			response_body = JSON.parse response.body
 			expect(response_body["message"]).to eq 'Transferência realizada com sucesso!'
@@ -55,7 +73,6 @@ RSpec.describe TransactionController, type: :controller do
 
       expect(source_client.account.balance).to eq 1231.29
     end
-
   end
 
 end
