@@ -16,7 +16,7 @@ MyBank is a banking account system that helps customers manage their bank balanc
 
 ## Installation
 
-**Dependention note**: MyBank requires the MongoDB is instaled and up.
+**Dependention note**: MyBank requires the MongoDB is instaled and up. The project was build with Ruby on Rails and use AngularJS at front-end.
 
 1. Clone the project.
 
