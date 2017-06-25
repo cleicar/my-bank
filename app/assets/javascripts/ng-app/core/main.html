@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default navbar-static-top">
+	<div class="container">
+
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">MyBank</a>
+		</div>
+	
+		<div id="navbar" class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+				<li ui-sref-active="active"><a ui-sref="portal.home">Inicio</a></li>
+				<li ui-sref-active="active"><a ui-sref="portal.transactions">Nova Transferência</a></li>
+			</ul>
+		</div>
+		
+	</div>
+</nav>
+
+<div class="container" style="min-height: 561px;">
+	<div ui-view></div>
+</div>

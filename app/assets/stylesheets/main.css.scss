@@ -1,0 +1,289 @@
+body {
+  background-color: #fff;
+  //  padding-bottom: 20px;
+}
+
+.wrapper, html, body, #wrapper{
+  background-color: #fff;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.page-wrapper {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+  padding: 15px 30px 39px !important;
+}
+
+@media(min-width:768px) {
+  .page-wrapper {
+    position: inherit;
+    margin: 0 0 0 250px;
+    padding: 0 30px;
+  }
+}
+
+.navbar-top-links {
+  margin-right: 0;
+}
+
+.navbar-top-links li {
+  display: inline-block;
+}
+
+.navbar-top-links li:last-child {
+  margin-right: 15px;
+}
+
+.navbar-top-links li a {
+  padding: 15px;
+  min-height: 50px;
+}
+
+.navbar-top-links .dropdown-menu li {
+  display: block;
+}
+
+.navbar-top-links .dropdown-menu li:last-child {
+  margin-right: 0;
+}
+
+.navbar-top-links .dropdown-menu li a {
+  padding: 3px 20px;
+  min-height: 0;
+}
+
+.navbar-top-links .dropdown-menu li a div {
+  white-space: normal;
+}
+
+.navbar-top-links .dropdown-messages,
+.navbar-top-links .dropdown-tasks,
+.navbar-top-links .dropdown-alerts {
+  width: 310px;
+  min-width: 0;
+}
+
+.navbar-top-links .dropdown-messages {
+  margin-left: 5px;
+}
+
+.navbar-top-links .dropdown-tasks {
+  margin-left: -59px;
+}
+
+.navbar-top-links .dropdown-alerts {
+  margin-left: -123px;
+}
+
+.navbar-top-links .dropdown-user {
+  right: 0;
+  left: auto;
+}
+
+@media(min-width:768px) {
+  .navbar-top-links .dropdown-messages,
+  .navbar-top-links .dropdown-tasks,
+  .navbar-top-links .dropdown-alerts {
+    margin-left: auto;
+  }
+}
+
+.btn-outline {
+  color: inherit;
+  background-color: transparent;
+  transition: all .5s;
+}
+
+.btn-primary {
+  background-color: #0c2632;
+  border-color: #0c2632;
+  margin-bottom: 0px !important;
+  margin-top: 0px;
+}
+
+.btn-primary:hover, .btn-primary.focus, .btn-primary:focus {
+  background-color: #486852;
+  border-color: #486852;
+}
+
+.btn-success.btn-outline {
+  color: #5cb85c;
+}
+
+.btn-info.btn-outline {
+  color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+  color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+  color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+  color: #fff;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.428571429;
+}
+
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-size: 18px;
+  line-height: 1.33;
+}
+
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  border-radius: 35px;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+.huge {
+  font-size: 40px;
+}
+
+.brand-logo{
+  float: left;
+  height: 40px;
+  width: 40px;
+  margin: 5px;
+}
+
+.navbar-static-top{
+  border-width: 0;
+  height: 50px;
+  margin-bottom: 0;
+}
+
+.btn {
+  padding: 3px 12px;
+}
+
+.container {
+  height: 100%;
+  margin-top: 0;
+  max-width: 1024px !important;
+  overflow: visible;
+}
+
+.navbar-top-links .dropdown-user {
+  left: auto;
+  min-width: 100%;
+  right: 0;
+}
+
+.box-bordered{
+  width: 100%;
+  border: 1px solid rgb(238, 238, 238);
+  padding: 15px 5px;
+ font-size: 25px;
+}
+
+.box-bordered i {
+  font-size: 20px;
+}
+
+.alert{
+  padding: 5px !important;
+}
+
+.btn-primary.btn-outline {
+  border-color: #428bca;
+  color: #428bca;
+  background-color: transparent;
+}
+
+.col-md-6 {
+  width: 50% !important;
+}
+
+.col-md-3 {
+  width: 25% !important;
+}
+
+.col-md-12 {
+  width: 100% !important;
+}
+
+.form-control{
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Customize container */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+.nav>li.active>a {
+  text-decoration: none;
+  background-color: #eee;
+}
+
+.navbar .nav li a {
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
+.navbar-toggle {
+  float: left;
+  margin-left: 10px;
+  display: block;
+}
+
+.panel-default {
+  min-height: 180px !important;
+}
+
+.navbar-brand{
+  color: #000 !important;
+}
