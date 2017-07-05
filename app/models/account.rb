@@ -2,7 +2,7 @@
 class Account
   include Mongoid::Document
 
-  field :account_code, type: BSON::ObjectId
+  field :account_code, type: String
   field :balance, type: Float
 
   validates :account_code, :balance, presence: true
