@@ -13,6 +13,7 @@
       'ui.bootstrap',
       'angular-loading-bar',
       'toggle-switch',
+      'ngTable',
       'ngCookies'
     ]);
 })();

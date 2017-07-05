@@ -10,9 +10,10 @@
   function TransactionsCtrl($timeout, $state, transactionsService) {
     var vm = this;   
 
-    vm.saveTransaction    = saveTransaction;
-    vm.getAccountUsername = getAccountUsername;
-    vm.cancelTransaction  = cancelTransaction;
+    vm.saveTransaction      = saveTransaction;
+    vm.getAccountUsername   = getAccountUsername;
+    vm.cancelTransaction    = cancelTransaction;
+    vm.getLastTransactions  = getLastTransactions;
 
     vm.$onInit = initialize;
 
@@ -47,6 +48,17 @@
     function cancelTransaction() {
       $state.go('portal.home');
     }    
+
+    function getLastTransactions() {
+      transactionsService.getTransactions(vm.ts)
+      .then(function(response) {
+        if(response.success)
+          $state.go('portal.home');
+        else
+          vm.message = response.message;
+      })
+      .catch(error);
+    }
 
     function error(response) {
       vm.message = "Houve um erro inesperado ao carregar os dados.";

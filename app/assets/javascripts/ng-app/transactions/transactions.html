@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-lg-12">
-    <h2 class="page-header">New Transfer</h2>
+    <h2 class="page-header">Last Transfers</h2>
   </div>  
 </div>
 
@@ -8,60 +8,28 @@
   {{ vm.message }}
 </div>
 
+<form class="form-group form-inline col-lg-12" role="form">
+  <div class="col-lg-6">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="form-group col-md-12">
+              <label class="control-label">Your Account Code</label>
+              <input type="text" id="disabledInput" ng-required="required" class="form-control col-md-12" ng-model="vm.account.account_code">
+            </div>
+            <div class="form-group col-md-12">
+              <button type="submit" class="form-control btn btn-default pull-left" ng-click="vm.getLastTransactions()">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
 <div class="row">
-  <form class="form-group form-inline col-lg-12" role="form" ng-submit="vm.saveTransaction()">
-    <div class="col-lg-6"> <!-- source account !-->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Trasfer from
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="form-group col-md-12">
-                <label class="control-label">Account</label>
-                <input type="text" required class="form-control col-md-12" ng-model="vm.ts.source_account" ng-blur="vm.getAccountUsername()">
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Client</label>
-                <input type="text" required ng-disabled="true" class="form-control col-md-12" ng-model="vm.ts.source_name">
-              </div>
-              <div class="form-group col-md-12">
-                <label class="control-label">Date/Hour</label>
-                <input type="text" required ng-disabled="true" class="form-control col-md-12" ng-model="vm.ts.date">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- /source account !-->
+  <table ng-table="tableParams" class="table table-striped">
 
-    <div class="col-lg-6"> <!-- destination account !-->
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          Trasfer to
-        </div>
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="form-group col-md-12">
-                <label class="control-label">Account</label>
-                <input type="text" ng-disabled="vm.blockFields" required class="form-control col-md-12" ng-model="vm.ts.destination_account">
-              </div>
-
-              <div class="form-group col-md-12">
-                <label class="control-label">Amount</label>
-                <input type="text" ng-disabled="vm.blockFields" class="form-control col-md-12" ng-model="vm.ts.amount">
-              </div>
-
-              <div class="form-group col-md-12">
-                <button type="submit" ng-disabled="vm.blockFields" class="form-control btn btn-default pull-left">Enviar</button>
-                <button type="reset"  class="form-control btn btn-default pull-left" ng-click="vm.cancelTransaction()">Cancelar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div><!-- /destination account !-->
-  </form>
+  </table>
 </div>

@@ -26,6 +26,12 @@
         controller: 'BalanceCtrl',
         templateUrl: '/assets/ng-app/balance/balance.html'
       })
+      .state('portal.newTransaction', {
+        url: '/new_transaction',
+        controller: 'TransactionsCtrl',
+        controllerAs: 'vm',
+        templateUrl: '/assets/ng-app/transactions/new_transaction.html'
+      })
       .state('portal.transactions', {
         url: '/transactions',
         controller: 'TransactionsCtrl',

@@ -1,32 +1,39 @@
+require_relative '../domain/transfer_money'
+
 class TransactionController < ApplicationController
   include TransactionHelper
 
   respond_to :json
 
   def index
+    debts   = Transaction.where(source_account_id: params[:account]).all
+    credits = Transaction.where(destination_account_id: params[:account]).all
+
+    render status: 200, json: {debts: debts, credits: credits}
   end
 
   def create
     response = Hash.new
     response[:success] = false
 
-    destination_account = get_account_by_code(params[:destination_account])
+    source_account      = Account.where(account_code: params[:source_account]).first
+    destination_account = Account.where(account_code: params[:destination_account]).first
 
-    if destination_account.present?
-      source_account = get_account_by_code(params[:source_account])
+    transfer_obj = TransferMoney.new(source_account, destination_account, params[:amount].to_f)
 
-      if source_account.balance < params[:amount].to_f
-        response[:message] = "Saldo insuficiente."
-      else
-        response = transfer_money(source_account, destination_account, params[:amount])
-        response[:success] = true
-        response[:message] = "Transferência realizada com sucesso!"
-      end
+    debugger
+
+    if transfer_obj.transfer
+      response[:success] = true
+      response[:message] = 'Transferencia realizada com sucesso'
+      status  = 200
     else
-      response[:message] = "Conta destino não existe."
+      response[:success] = false
+      response[:message] = 'Ocorreu uma falha ao realizar essa transferencia'
+      status = 406
     end
 
-    render status: 200, json: response
+    render status: status, json: response
   end
 
 end

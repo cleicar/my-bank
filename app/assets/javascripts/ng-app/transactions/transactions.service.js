@@ -25,6 +25,12 @@
       .then(done)
       .catch(failed);
     }
+    
+    function getTransactions(account) {
+      return $http.get('/account/get_username', {params: {account_code: account}})
+      .then(done)
+      .catch(failed);
+    }
 
     //create
     function transferMoney(params) {

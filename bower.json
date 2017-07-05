@@ -16,7 +16,8 @@
     "angular": "1.5.9",
     "angular-loading-bar": "^0.9.0",
     "angular-dialog-service": "^5.3.0",
-    "angular-ui-router": "^0.3.1"
+    "angular-ui-router": "^0.3.1",
+    "ng-table": "^1.0.0"
   },
   "resolutions": {
     "angular": "1.5.9"

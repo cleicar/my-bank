@@ -22,6 +22,7 @@
 //= require angular-resource
 //= require angular-sanitize
 //= require angular-toggle-switch
+//= require ng-table
 //= require es5-shim
 //= require json3
 //= require_self
