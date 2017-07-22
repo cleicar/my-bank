@@ -35,8 +35,6 @@ RSpec.describe TransactionController, type: :controller do
 
 			source_client.update_attributes(account: account_a)
 			destination_client.update_attributes(account: account_b)
-
-			post :create, @params
 		end
 
 		it 'should cancel transaction if destination account does not exists' do 
@@ -54,21 +52,27 @@ RSpec.describe TransactionController, type: :controller do
 			post :create, @params
 
 			response_body = JSON.parse response.body
-			expect(response_body["message"]).to eq 'Saldo insuficiente.'
+			expect(response_body["message"]).to eq 'Ocorreu uma falha ao realizar essa transferencia'
 		end
 
   	it 'should save the new transaction' do
+  		post :create, @params
+
 			response_body = JSON.parse response.body
-			expect(response_body["message"]).to eq 'Transferência realizada com sucesso!'
+			expect(response_body["message"]).to eq 'Transferencia realizada com sucesso'
   	end
 
   	it 'destination account should have more balance' do
+  		post :create, @params
+
       destination_client.reload
 
       expect(destination_client.account.balance).to eq 1018.17
     end
 
     it 'source account should have less balance' do 
+    	post :create, @params
+    	
     	source_client.reload
 
       expect(source_client.account.balance).to eq 1231.29

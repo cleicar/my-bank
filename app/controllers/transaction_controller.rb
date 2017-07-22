@@ -19,18 +19,21 @@ class TransactionController < ApplicationController
     source_account      = Account.where(account_code: params[:source_account]).first
     destination_account = Account.where(account_code: params[:destination_account]).first
 
-    transfer_obj = TransferMoney.new(source_account, destination_account, params[:amount].to_f)
-
-    debugger
-
-    if transfer_obj.transfer
-      response[:success] = true
-      response[:message] = 'Transferencia realizada com sucesso'
-      status  = 200
+    if destination_account.blank?
+      response[:message] = 'Conta destino não existe.'
+      status  = 001
     else
-      response[:success] = false
-      response[:message] = 'Ocorreu uma falha ao realizar essa transferencia'
-      status = 406
+      transfer_obj = TransferMoney.new(source_account, destination_account, params[:amount].to_f)
+
+      if transfer_obj.transfer
+        response[:success] = true
+        response[:message] = 'Transferencia realizada com sucesso'
+        status  = 200
+      else
+        response[:success] = false
+        response[:message] = 'Ocorreu uma falha ao realizar essa transferencia'
+        status = 406
+      end
     end
 
     render status: status, json: response
