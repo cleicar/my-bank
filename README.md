@@ -12,6 +12,7 @@ MyBank is a banking account system that helps customers manage their bank balanc
 * [How It Works](#how-it-works)
 	* [Get Current Balance](#get-current-balance)
 	* [Transfer Money](#get-current-balance)
+	* [List Transfers](#list-transfers)
 * [Testing with RSpec](#testing-with-rspec)
 
 ## Installation
@@ -62,9 +63,17 @@ If destination account exists and the source account has enough balance, the mon
 
 The datetime of transaction is also saved.
 
+### List Transfers
+
+To see the last tranfers, the user needs to input his own account code and trigger button `search`. The system will validates the account on the database. If the account doesn't exists, a warning message will be displayed.
+
+If the user account exists, all his transfer will be displayed. Note that the field type will
+
 ## Testing with RSpec
 
 The project was build with TDD (Test Driven Development). To execute the tests just run the tests with RSpec.
+
+1. Execute all tests
 
 	~~~ sh
 	$ bundle exec rspec
