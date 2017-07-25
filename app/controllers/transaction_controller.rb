@@ -6,10 +6,19 @@ class TransactionController < ApplicationController
   respond_to :json
 
   def index
-    debts   = Transaction.where(source_account_id: params[:account]).all
-    credits = Transaction.where(destination_account_id: params[:account]).all
+    account = Account.where(account_code: params[:account]).first
 
-    render status: 200, json: {debts: debts, credits: credits}
+    if account.blank?
+      message = 'Esta conta não existe.'
+      status  = 001
+    else
+      debts    = Transaction.where(source_account_id: account.account_code).all
+      credits  = Transaction.where(destination_account_id: account.account_code).all
+      tranfers = debts.concat(credits)
+      status   = 200
+    end
+
+    render status: 200, json: {status: status, message: message, transactions: tranfers}
   end
 
   def create
@@ -38,5 +47,4 @@ class TransactionController < ApplicationController
 
     render status: status, json: response
   end
-
 end

@@ -8,25 +8,42 @@
   {{ vm.message }}
 </div>
 
-<form class="form-group form-inline col-lg-12" role="form">
+<div class="row">
   <div class="col-lg-6">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="form-group col-md-12">
-              <label class="control-label">Your Account Code</label>
-              <input type="text" id="disabledInput" ng-required="required" class="form-control col-md-12" ng-model="vm.account.account_code">
-            </div>
-            <div class="form-group col-md-12">
-              <button type="submit" class="form-control btn btn-default pull-left" ng-click="vm.getLastTransactions()">Send</button>
+    <form class="form-group form-inline col-lg-12" role="form">    
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="form-group col-md-12">
+                <label class="control-label">Your Account Code</label>
+                <input type="text" id="disabledInput" ng-required="required" class="form-control col-md-12" ng-model="vm.ts.account_code">
+              </div>
+              <div class="form-group col-md-12">
+                <button type="submit" class="form-control btn btn-default pull-left" ng-click="vm.getLastTransactions()">Search</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   </div>
-</form>
+
+  <div class="col-lg-6">
+    <button type="reset" class="form-control btn btn-default pull-center col-md-6" ng-click="vm.openNewTransaction()">New Transfer</button>
+  </div>
+</div>
+
+<table ng-table="vm.tableParams" class='table' show-filter="false" ng-show="vm.tableParams != undefined">
+  <tr ng-repeat="transfer in $data">
+    <td header-class="'text-center'" class="text-center"   title="'Date'">{{ transfer.date }}</td>
+    <td header-class="'text-center'" class="text-center" title="'Type'"">
+      {{ vm.ts.account_code == transfer.destination_account_id ? 'C' : 'D' }}
+    </td>
+    <td header-class="'text-center'" class="text-center" title="'Amount'">{{ transfer.amount | currency: 'R$' }}</td>
+    <td header-class="'text-center'" class="text-center" title="'Destination Account'">{{ transfer.destination_account_id }}</td>    
+  </tr>
+</table>
 
 <div class="row">
   <table ng-table="tableParams" class="table table-striped">

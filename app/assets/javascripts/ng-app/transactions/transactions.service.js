@@ -11,7 +11,8 @@
     return {
       getBalance: getBalance,
       getUsername: getUsername,
-      transferMoney: transferMoney
+      transferMoney: transferMoney,
+      getTransactions: getTransactions
     };
 
     function getBalance(params) {
@@ -27,7 +28,7 @@
     }
     
     function getTransactions(account) {
-      return $http.get('/account/get_username', {params: {account_code: account}})
+      return $http.get('/transaction/', {params: {account: account}})
       .then(done)
       .catch(failed);
     }

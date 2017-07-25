@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :transaction, only: [:index, :create] do
     collection do
+      get 'list'
     end
   end
 

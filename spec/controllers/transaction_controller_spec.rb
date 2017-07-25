@@ -13,7 +13,6 @@ RSpec.describe TransactionController, type: :controller do
   end
 
 	context "Testing adding new transaction" do 
-
 		let(:source_client){
       FactoryGirl.create(:user)
     }
@@ -77,6 +76,33 @@ RSpec.describe TransactionController, type: :controller do
 
       expect(source_client.account.balance).to eq 1231.29
     end
+  end
+
+  context "Listing transactions" do 
+    let(:account){
+      FactoryGirl.create(:account_a)
+    }
+
+    before do 
+      FactoryGirl.create(:credit_transaction)
+    end
+
+		it 'should list one transaction' do
+			get :index, account: account.account_code
+
+			response_body = JSON.parse(response.body).with_indifferent_access
+
+			expect(response_body[:transactions].count).to eq 1
+		end
+
+		it 'should return that account does not exist' do
+			get :index, account: '0100427'
+
+			response_body = JSON.parse response.body
+
+			expect(response_body["message"]).to eq 'Esta conta não existe.'
+		end
+
   end
 
 end

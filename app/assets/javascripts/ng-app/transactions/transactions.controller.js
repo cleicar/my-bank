@@ -5,15 +5,16 @@
     .module('MyBank')
     .controller('TransactionsCtrl', TransactionsCtrl);
 
-  TransactionsCtrl.$inject = ['$timeout', '$state', 'transactionsService'];
+  TransactionsCtrl.$inject = ['$timeout', '$state', 'transactionsService', 'NgTableParams'];
 
-  function TransactionsCtrl($timeout, $state, transactionsService) {
+  function TransactionsCtrl($timeout, $state, transactionsService, ngTableParams) {
     var vm = this;   
 
     vm.saveTransaction      = saveTransaction;
     vm.getAccountUsername   = getAccountUsername;
     vm.cancelTransaction    = cancelTransaction;
     vm.getLastTransactions  = getLastTransactions;
+    vm.openNewTransaction   = openNewTransaction;
 
     vm.$onInit = initialize;
 
@@ -50,14 +51,19 @@
     }    
 
     function getLastTransactions() {
-      transactionsService.getTransactions(vm.ts)
+      transactionsService.getTransactions(vm.ts.account_code)
       .then(function(response) {
-        if(response.success)
-          $state.go('portal.home');
+        if(response.status == 200){
+          vm.tableParams = new ngTableParams({}, { dataset: response.transactions});
+        }
         else
           vm.message = response.message;
       })
       .catch(error);
+    }
+
+    function openNewTransaction() {
+      $state.go('portal.newTransaction');
     }
 
     function error(response) {
